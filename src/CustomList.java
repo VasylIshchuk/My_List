@@ -214,4 +214,14 @@ public class CustomList<T> extends AbstractList<T> {
 //    return count;
 //    }
 
+    public <T extends Number> int compareTo(List<T> collection1, List<T> collection2){
+        return Double.compare(calculateSum(collection1), calculateSum(collection2));
+    }
+    public <T extends Number> double calculateSum(List<T> list){
+        double sum=0;
+        for(T item : list){
+            sum +=(Double) item;
+        }
+        return sum;
+    }
 }
