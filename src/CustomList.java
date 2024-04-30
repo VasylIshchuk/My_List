@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class CustomList<T> extends AbstractList<T> {
@@ -185,5 +186,32 @@ public class CustomList<T> extends AbstractList<T> {
 //            }
 //        }
 //        return newList;
+
+    public static <T extends Comparable<T>> Predicate<T> isInOpenInterval(T lowerBound, T upperBound) {
+        return value -> value.compareTo(lowerBound) > 0 && value.compareTo(upperBound) < 0;
+    }
+//        This is <T extends Comparable<T>> in order that can use compateTo
+//        And it's sets what T will be in this method
+
+    public static <T extends Comparable<T>> int countElementsInOpenInterval(List<T> list, T lowerBound, T upperBound) {
+        Predicate<T> predicate = isInOpenInterval(lowerBound, upperBound);
+//        For T to be the same as in isInOpenInterval we write <T extends Comparable<T>>;
+        int count = 0;
+        for (T item : list) {
+            if (predicate.test(item)) {
+                ++count;
+            }
+        }
+        return count;
+    }
+//    public static <T extends Comparable<T>> int sizeInOpenInterval(List<T> list, T lowerBound, T upperBound ){
+//        int count = 0;
+//        for(T item : list){
+//            if( item.compareTo(lowerBound) > 0 && item.compareTo(lowerBound) < 0){
+//                ++count;
+//            }
+//        }
+//    return count;
+//    }
 
 }
