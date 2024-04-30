@@ -1,6 +1,4 @@
-import java.util.AbstractList;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class CustomList<T> extends AbstractList<T> {
@@ -166,4 +164,26 @@ public class CustomList<T> extends AbstractList<T> {
         }
         return streamBuilder.build();
     }
+
+    public static <T> CustomList<T> filterByClass(CustomList<T> list , Class<?> clas) {
+        CustomList<T> newList = new CustomList<>();
+        list.stream()
+                .filter(clas::isInstance)
+            .forEach(newList::add);
+        return newList;
+    }
+//    CustomList<T> newList = new CustomList<>();
+//        list.stream()
+//                .filter(item -> item.getClass().equals(clas))//clas::isInstance
+//            .forEach(newList::add);
+//        return newList;
+//    or
+//        CustomList<T> newList = new CustomList<>();
+//        for( T item : list){
+//            if(clas.equals(item.getClass())){//clas.isInstance(item)
+//                newList.add(item);
+//            }
+//        }
+//        return newList;
+
 }
